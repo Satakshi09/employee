@@ -7,12 +7,24 @@ pipeline {
         stage('Build') {
             steps {
                 git branch: 'master', url: 'https://github.com/Satakshi09/employee'
-                sh "mvn clean install -DskipTests"
+                script {
+                    if (isUnix()) {
+                        sh "mvn clean install -DskipTests"
+                    } else {
+                        bat "mvn clean install -DskipTests"
+                    }
+                }
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                script {
+                    if (isUnix()) {
+                        sh 'mvn test'
+                    } else {
+                        bat 'mvn test'
+                    }
+                }
             }
         }
     }
