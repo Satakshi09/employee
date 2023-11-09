@@ -29,7 +29,7 @@ pipeline {
         stage('Push Docker Image to Dockerhub') {
             steps {
                 script {
-                    sh 'docker login -u satakshi09 -p "S@ttu123"'
+                    sh 'docker login -u satakshi09 -p "S@ttu12345678"'
                     sh "docker push ${DOCKER_IMAGE_NAME}"
                 }
             }
