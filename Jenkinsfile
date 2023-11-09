@@ -8,7 +8,7 @@ pipeline {
         CONTAINER_PORT = "8080"  // Update container port
     }
     tools {
-        maven "apache-maven-3.8.6"
+        maven "jenkins-maven-3.9.5"
     }
     stages {
         stage('Build') {
