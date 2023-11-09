@@ -34,14 +34,15 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to Docker') {
-            steps {
-                script {
-                    sh "docker stop ${CONTAINER_NAME} && docker rm ${CONTAINER_NAME} || true"
-                    sh "docker pull ${DOCKER_IMAGE_NAME}"
-                    sh "docker run -d --name ${CONTAINER_NAME} -p ${HOST_PORT}:${CONTAINER_PORT} ${DOCKER_IMAGE_NAME}"
-                }
-            }
-        }
+       stage('Deploy to Docker') {
+           steps {
+               script {
+                   sh "docker stop ${CONTAINER_NAME} && docker rm ${CONTAINER_NAME} || true"
+                   sh "docker pull ${DOCKER_IMAGE_NAME}"
+                   sh "docker run --name ${CONTAINER_NAME} -p ${HOST_PORT}:${CONTAINER_PORT} -d ${DOCKER_IMAGE_NAME}"
+               }
+           }
+       }
+
     }
 }
