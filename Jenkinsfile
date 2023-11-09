@@ -13,9 +13,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-            checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Satakshi09/employee']])                script {
-                    sh "mvn clean install -DskipTests"
-                }
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Satakshi09/employee']])
+                sh "mvn clean install -DskipTests"
             }
         }
         stage('Test') {
