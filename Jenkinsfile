@@ -40,7 +40,7 @@ pipeline {
                     sh "docker stop ${CONTAINER_NAME} && docker rm ${CONTAINER_NAME} || true"
                     sh "docker pull ${DOCKER_IMAGE_NAME}"
 
-                    // Check if running on Windows, use 'start' command
+                    // Check if running on Unix, use 'sh' command; otherwise, use 'bat' command
                     if (isUnix()) {
                         sh "docker run --name ${CONTAINER_NAME} -p ${HOST_PORT}:${CONTAINER_PORT} -d ${DOCKER_IMAGE_NAME}"
                     } else {
