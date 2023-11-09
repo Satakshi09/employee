@@ -2,13 +2,13 @@ pipeline {
     agent any
     environment {
         APP_NAME = "spring-boot-app"
-        DOCKER_IMAGE_NAME = "rest"
+        DOCKER_IMAGE_NAME = "satakshi09/rest"  // Update Docker image name
         CONTAINER_NAME = "${APP_NAME}-container"
         HOST_PORT = "8080"
-        CONTAINER_PORT = "8080"
+        CONTAINER_PORT = "8080"  // Update container port
     }
     tools {
-        maven "jenkins-maven-3.9.5"
+        maven "apache-maven-3.8.6"
     }
     stages {
         stage('Build') {
@@ -34,15 +34,14 @@ pipeline {
                 }
             }
         }
-       stage('Deploy to Docker') {
-           steps {
-               script {
-                   sh "docker stop ${CONTAINER_NAME} && docker rm ${CONTAINER_NAME} || true"
-                   sh "docker pull ${DOCKER_IMAGE_NAME}"
-                   sh "docker run --name ${CONTAINER_NAME} -p ${HOST_PORT}:${CONTAINER_PORT} -d ${DOCKER_IMAGE_NAME}"
-               }
-           }
-       }
-
+        stage('Deploy to Docker') {
+            steps {
+                script {
+                    sh "docker stop ${CONTAINER_NAME} && docker rm ${CONTAINER_NAME} || true"
+                    sh "docker pull ${DOCKER_IMAGE_NAME}"
+                    sh "docker run --name ${CONTAINER_NAME} -p ${HOST_PORT}:${CONTAINER_PORT} -d ${DOCKER_IMAGE_NAME}"
+                }
+            }
+        }
     }
 }
